@@ -1,38 +1,221 @@
-.App {
-  text-align: center;
+/* Hero Section */
+.about-lawyer {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  color: white !important;
+  padding: 80px 0 !important;
+  position: relative;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.about-lawyer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.about-lawyer h2 {
+  color: white !important;
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.about-lawyer p {
+  color: rgba(255, 255, 255, 0.95) !important;
+  font-size: 1.25rem;
+  position: relative;
+  z-index: 1;
+}
+
+.about-lawyer .fs-4 {
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+/* Services Section */
+.services-section {
+  padding: 80px 0;
+}
+
+.services-section h3 {
+  color: var(--text-dark);
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  position: relative;
+  display: inline-block;
+}
+
+.services-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  border-radius: 2px;
+}
+
+/* Service Cards */
+.service-card {
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  transition: var(--transition);
+  background: white;
+  border: 1px solid #e5e7eb;
+  height: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--primary-light);
+}
+
+.service-card .card-body {
+  padding: 2rem;
+}
+
+.service-card .fa-2x {
+  color: var(--primary-light);
+  transition: var(--transition);
+  margin-bottom: 1.5rem;
+}
+
+.service-card:hover .fa-2x {
+  transform: scale(1.2) rotate(5deg);
+  color: var(--secondary-color);
+}
+
+.service-card .card-title {
+  color: var(--text-dark);
+  font-size: 1.25rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.service-card .card-text {
+  color: var(--text-light);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/* Location Section */
+.location-section {
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  padding: 80px 0;
+}
+
+.location-section h3 {
+  color: var(--text-dark);
+  font-size: 2.5rem;
+  margin-bottom: 60px;
+  position: relative;
+  display: inline-block;
+}
+
+.location-section h3::after {
+  content: '';
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
+  border-radius: 2px;
+}
+
+.location-content {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  gap: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.location-image {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  transition: var(--transition);
+  max-width: 500px;
+  width: 100%;
+  height: auto;
 }
 
-@keyframes App-logo-spin {
+.location-image:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-xl);
+}
+
+.location-map {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+  border: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: rotate(360deg);
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .about-lawyer h2 {
+    font-size: 2.5rem;
+  }
+
+  .location-content {
+    flex-direction: column;
+  }
+
+  .location-image,
+  .location-map {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-lawyer {
+    padding: 60px 0 !important;
+  }
+
+  .about-lawyer h2 {
+    font-size: 2rem;
+  }
+
+  .about-lawyer p {
+    font-size: 1rem;
+  }
+
+  .services-section,
+  .location-section {
+    padding: 60px 0;
+  }
+
+  .services-section h3,
+  .location-section h3 {
+    font-size: 2rem;
   }
 }
