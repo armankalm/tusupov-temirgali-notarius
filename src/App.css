@@ -389,7 +389,7 @@
   }
 
   .location-content {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: stretch;
   }
 

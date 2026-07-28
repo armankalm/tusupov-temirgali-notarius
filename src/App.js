@@ -135,16 +135,7 @@ function App() {
           <h2 id="location-title">Расположение</h2>
         </div>
         <div className="location-content">
-          <figure className="location-figure">
-            <img
-              src={img1}
-              alt={`Вход в нотариальную контору: ${contacts.address.full}`}
-              className="location-image"
-              width="960"
-              height="1280"
-              loading="lazy"
-            />
-          </figure>
+
 
           <div className="location-map-column">
             <div className="location-map-frame">

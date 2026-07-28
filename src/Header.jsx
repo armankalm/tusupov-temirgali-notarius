@@ -34,19 +34,19 @@ export default function Header() {
 
           <div className="col-lg-4 col-md-6 col-12">
             <div className="contact-info d-flex align-items-center justify-content-center gap-2">
-              <div className="icon-wrapper">
-                <FontAwesomeIcon icon={faPhone} />
+              <div>
+                <a href={contacts.phone.whatsappWithText}
+                   className="social-link whatsapp" target="_blank" rel="noopener noreferrer"
+                   aria-label="Написать в WhatsApp">
+                  <FontAwesomeIcon icon={faWhatsapp} />
+                </a>
               </div>
               <div className="contact-details">
-                <a href={contacts.phone.tel} className="contact-link">
+                <a href={contacts.phone.whatsappWithText} className="contact-link">
                   {contacts.phone.display}
                 </a>
                 <div className="social-icons mt-1">
-                  <a href={contacts.phone.whatsappWithText}
-                     className="social-link whatsapp" target="_blank" rel="noopener noreferrer"
-                     aria-label="Написать в WhatsApp">
-                    <FontAwesomeIcon icon={faWhatsapp} />
-                  </a>
+
                   {contacts.phone.telegram && (
                     <a href={contacts.phone.telegram}
                        className="social-link telegram" target="_blank" rel="noopener noreferrer"
