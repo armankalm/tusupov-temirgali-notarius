@@ -57,12 +57,12 @@
 - [x] Уменьшить `service-card:hover` подъём с `translateY(-10px)` до `-4px`
 
 ### Task 5: Вынести инлайн-стили формы в CSS
-- [ ] Создать `src/ContactForm.css` со стилями карточки, инпутов, лейблов, кнопки и success-блока
-- [ ] Удалить все `style={{...}}` из `src/ContactForm.jsx`, заменить на классы
-- [ ] Удалить `onFocus`/`onBlur` хендлеры смены `borderColor` — заменить на CSS `:focus` / `:focus-visible`
-- [ ] Удалить `onMouseOver`/`onMouseOut` с кнопки submit — заменить на CSS `:hover`
-- [ ] Заменить инлайн-SVG success-иконки на компонент с классом, стилизовать через CSS
-- [ ] Применить новые токены дизайн-системы (цвета, радиусы, тени) вместо хардкод-значений
+- [x] Создать `src/ContactForm.css` со стилями карточки, инпутов, лейблов, кнопки и success-блока
+- [x] Удалить все `style={{...}}` из `src/ContactForm.jsx`, заменить на классы
+- [x] Удалить `onFocus`/`onBlur` хендлеры смены `borderColor` — заменить на CSS `:focus` / `:focus-visible`
+- [x] Удалить `onMouseOver`/`onMouseOut` с кнопки submit — заменить на CSS `:hover`
+- [x] Заменить инлайн-SVG success-иконки на компонент `SuccessIcon` с классом, стилизовать через CSS (`fill`/`stroke` через `currentColor`)
+- [x] Применить новые токены дизайн-системы (цвета, радиусы, тени) вместо хардкод-значений
 
 ### Task 6: Hero-секция с CTA
 - [ ] Переписать блок `.about-lawyer` в `src/App.js`: заголовок, ФИО, короткий подзаголовок с городом (Караганда) и специализацией
