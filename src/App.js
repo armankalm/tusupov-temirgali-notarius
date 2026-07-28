@@ -3,8 +3,70 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ContactForm from "./ContactForm";
 import img1 from "./img/054f8a21-b5dd-4f7e-bef0-e0ca28309acd.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileContract, faHandshake, faScroll, faCheckCircle, faPen, faGavel, faRing, faCopy, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
-import { contacts } from "./config/contacts";
+import { faFileContract, faHandshake, faScroll, faCheckCircle, faPen, faGavel, faRing, faCopy, faBalanceScale, faPhone, faCalendarCheck, faCertificate } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { contacts, getWorkStatus } from "./config/contacts";
+
+function Hero() {
+  const status = getWorkStatus();
+
+  function scrollToForm(e) {
+    e.preventDefault();
+    document.getElementById('contact-form')?.scrollIntoView({ block: 'start' });
+  }
+
+  return (
+    <section className="hero" aria-labelledby="hero-title">
+      <div className="container hero-inner">
+        <p className="hero-eyebrow">{contacts.notary.title}</p>
+        <h1 className="hero-title" id="hero-title">
+          {contacts.notary.fullName}
+        </h1>
+        <p className="hero-subtitle">
+          Нотариальные услуги в {contacts.address.city} — договоры, доверенности,
+          наследство и заверение документов.
+        </p>
+
+        <div className="hero-cta">
+          <a className="hero-btn hero-btn-primary" href={contacts.phone.tel}>
+            <FontAwesomeIcon icon={faPhone} />
+            Позвонить
+          </a>
+          <a
+            className="hero-btn hero-btn-whatsapp"
+            href={contacts.phone.whatsappWithText}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <FontAwesomeIcon icon={faWhatsapp} />
+            WhatsApp
+          </a>
+          <a className="hero-btn hero-btn-secondary" href="#contact-form" onClick={scrollToForm}>
+            <FontAwesomeIcon icon={faCalendarCheck} />
+            Записаться
+          </a>
+        </div>
+
+        <p className={`hero-status hero-status-${status.state}`}>
+          <span className="hero-status-dot" aria-hidden="true" />
+          {status.label}
+        </p>
+
+        <ul className="hero-hours">
+          {contacts.schedule.lines.map((line) => (
+            <li key={line}>{line}</li>
+          ))}
+        </ul>
+
+        <p className="hero-license">
+          <FontAwesomeIcon icon={faCertificate} aria-hidden="true" />
+          Лицензия №{contacts.notary.licenseNumber} Министерства юстиции РК
+          от {contacts.notary.licenseDate}
+        </p>
+      </div>
+    </section>
+  );
+}
 
 function App() {
   // Google Maps embed без API-ключа: поисковый запрос по актуальному адресу,
@@ -27,16 +89,7 @@ function App() {
 
   return (
     <div>
-      <div className="container-fluid about-lawyer">
-        <div className="container">
-          <h2>{contacts.notary.title}</h2>
-          <p className="fs-4 mb-2">{contacts.notary.fullName.toUpperCase()}</p>
-          <p style={{ maxWidth: '800px', margin: '0 auto' }}>
-            Действует на основании Лицензии №{contacts.notary.licenseNumber} выданной
-            Министерством юстиции Республики Казахстан от {contacts.notary.licenseDate}.
-          </p>
-        </div>
-      </div>
+      <Hero />
 
       <div className="container services-section">
         <div className="text-center">
@@ -73,7 +126,7 @@ function App() {
             title={`Карта расположения: ${contacts.address.full}`}
           ></iframe>
         </div>
-        <div className="mt-5">
+        <div className="mt-5" id="contact-form">
           <ContactForm />
         </div>
       </div>

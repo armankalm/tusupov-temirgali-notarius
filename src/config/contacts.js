@@ -60,4 +60,22 @@ export const contacts = {
   },
 };
 
+// Статус приёма на момент `now` по графику из contacts.schedule.
+// Возвращает { state, label } — state: 'open' | 'lunch' | 'closed'.
+export function getWorkStatus(now = new Date()) {
+  const { schedule } = contacts;
+  const hours = now.getHours() + now.getMinutes() / 60;
+
+  if (now.getDay() === schedule.dayOffIndex) {
+    return { state: 'closed', label: 'Закрыто — воскресенье выходной' };
+  }
+  if (hours >= schedule.lunchFrom && hours < schedule.lunchTo) {
+    return { state: 'lunch', label: `Обед до ${schedule.lunchTo}:00` };
+  }
+  if (hours >= schedule.opensAt && hours < schedule.closesAt) {
+    return { state: 'open', label: 'Открыто сейчас' };
+  }
+  return { state: 'closed', label: `Закрыто — откроемся в ${schedule.opensAt}:00` };
+}
+
 export default contacts;

@@ -1,43 +1,151 @@
 /* Hero Section */
-.about-lawyer {
+.hero {
   background: var(--primary-color);
-  color: white !important;
-  padding: 80px 0 !important;
-  position: relative;
-  overflow: hidden;
+  color: var(--text-on-dark);
+  padding: var(--space-8) 0;
+  border-bottom: 3px solid var(--gold);
 }
 
-.about-lawyer::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  opacity: 0.1;
+.hero-inner {
+  text-align: center;
 }
 
-.about-lawyer h2 {
-  color: white !important;
-  font-size: 3rem;
-  font-weight: 800;
-  letter-spacing: 2px;
-  margin-bottom: 1rem;
-  position: relative;
-  z-index: 1;
-}
-
-.about-lawyer p {
-  color: rgba(255, 255, 255, 0.95) !important;
-  font-size: 1.25rem;
-  position: relative;
-  z-index: 1;
-}
-
-.about-lawyer .fs-4 {
+.hero-eyebrow {
+  color: var(--gold-light);
+  font-size: 0.85rem;
   font-weight: 600;
-  margin-bottom: 1.5rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: var(--space-3);
+}
+
+.hero-title {
+  color: #ffffff;
+  font-size: 2.75rem;
+  margin-bottom: var(--space-4);
+}
+
+.hero-subtitle {
+  color: var(--text-on-dark);
+  font-size: 1.15rem;
+  max-width: 620px;
+  margin: 0 auto var(--space-6);
+}
+
+/* CTA */
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 48px;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.hero-btn-primary {
+  background: var(--gold);
+  color: var(--primary-dark);
+}
+
+.hero-btn-primary:hover,
+.hero-btn-primary:focus-visible {
+  background: var(--gold-light);
+  color: var(--primary-dark);
+}
+
+.hero-btn-whatsapp {
+  background: #1f8a5a;
+  color: #ffffff;
+}
+
+.hero-btn-whatsapp:hover,
+.hero-btn-whatsapp:focus-visible {
+  background: #1a744c;
+  color: #ffffff;
+}
+
+.hero-btn-secondary {
+  background: transparent;
+  color: var(--text-on-dark);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.hero-btn-secondary:hover,
+.hero-btn-secondary:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+/* Статус приёма */
+.hero-status {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-lg);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: var(--text-on-dark);
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: var(--space-3);
+}
+
+.hero-status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.hero-status-open .hero-status-dot { background: #5fd39b; }
+.hero-status-lunch .hero-status-dot { background: var(--gold-light); }
+.hero-status-closed .hero-status-dot { background: #d98b8b; }
+
+.hero-hours {
+  list-style: none;
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  color: var(--text-on-dark);
+  font-size: 0.95rem;
+}
+
+.hero-hours li + li {
+  margin-top: var(--space-1);
+}
+
+/* Лицензия — компактный бейдж */
+.hero-license {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  max-width: 640px;
+  margin: 0 auto;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: var(--radius-sm);
+  color: var(--text-on-dark);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.hero-license svg {
+  color: var(--gold-light);
+  flex-shrink: 0;
 }
 
 /* Services Section */
@@ -164,8 +272,8 @@
 
 /* Responsive Design */
 @media (max-width: 992px) {
-  .about-lawyer h2 {
-    font-size: 2.5rem;
+  .hero-title {
+    font-size: 2.25rem;
   }
 
   .location-content {
@@ -180,16 +288,21 @@
 }
 
 @media (max-width: 768px) {
-  .about-lawyer {
-    padding: 60px 0 !important;
+  .hero {
+    padding: var(--space-7) 0;
   }
 
-  .about-lawyer h2 {
-    font-size: 2rem;
+  .hero-title {
+    font-size: 1.85rem;
   }
 
-  .about-lawyer p {
+  .hero-subtitle {
     font-size: 1rem;
+  }
+
+  /* На узком экране кнопки тянутся на всю ширину — тач-таргет во весь ряд */
+  .hero-btn {
+    flex: 1 1 100%;
   }
 
   .services-section,
