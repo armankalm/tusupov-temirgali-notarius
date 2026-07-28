@@ -3,13 +3,16 @@
 
 const PHONE_RAW = '+77057372926';
 
+// Год начала нотариальной практики — стаж считается от него, а не хардкодится.
+export const PRACTICE_SINCE = 2010;
+
 export const contacts = {
   notary: {
     fullName: 'Тусупов Темиргали Расович',
     title: 'НОТАРИУС',
     licenseNumber: '0003207',
     licenseDate: '28 декабря 2010 года',
-    licenseSince: 2010,
+    licenseSince: PRACTICE_SINCE,
   },
 
   address: {
@@ -76,6 +79,29 @@ export function getWorkStatus(now = new Date()) {
     return { state: 'open', label: 'Открыто сейчас' };
   }
   return { state: 'closed', label: `Закрыто — откроемся в ${schedule.opensAt}:00` };
+}
+
+// Стаж в годах на момент `now` — считается от PRACTICE_SINCE, чтобы не устаревал.
+export function getYearsOfPractice(now = new Date()) {
+  return now.getFullYear() - PRACTICE_SINCE;
+}
+
+// Склонение «год / года / лет» по правилам русского счёта.
+// 1, 21, 31 — год; 2-4, 22-24 — года; 5-20, 11-14 — лет.
+export function pluralizeYears(count) {
+  const abs = Math.abs(count) % 100;
+  const last = abs % 10;
+
+  if (abs > 10 && abs < 20) return 'лет';
+  if (last === 1) return 'год';
+  if (last >= 2 && last <= 4) return 'года';
+  return 'лет';
+}
+
+// «15 лет» — готовая строка для вывода стажа.
+export function formatYearsOfPractice(now = new Date()) {
+  const years = getYearsOfPractice(now);
+  return `${years} ${pluralizeYears(years)}`;
 }
 
 export default contacts;

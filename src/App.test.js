@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import App from './App';
 import Header from './Header';
 import Footer from './Footer';
@@ -9,14 +9,16 @@ const OLD_STREET = /толе\s*би/i;
 
 test('hero выводит ФИО, город и номер лицензии из конфига', () => {
   render(<App />);
+  const hero = screen.getByRole('region', { name: contacts.notary.fullName });
   expect(
     screen.getByRole('heading', { level: 1, name: contacts.notary.fullName })
   ).toBeInTheDocument();
   expect(
     screen.getByText(new RegExp(`Нотариальные услуги в ${contacts.address.city}`))
   ).toBeInTheDocument();
+  // Номер лицензии есть и в hero, и в блоке доверия — проверяем именно hero.
   expect(
-    screen.getByText(new RegExp(`Лицензия №${contacts.notary.licenseNumber}`))
+    within(hero).getByText(new RegExp(`Лицензия №${contacts.notary.licenseNumber}`))
   ).toBeInTheDocument();
 });
 
