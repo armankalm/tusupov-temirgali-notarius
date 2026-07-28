@@ -4,7 +4,9 @@
   --primary-light: #1f3f6b;
   --primary-dark: #0c1c33;
   --gold: #b08d47;
-  --gold-dark: #8c6f38;
+  /* --gold-dark используется как цвет текста и иконок на светлом фоне,
+     поэтому затемнён до контраста ≥4.5:1 с --bg-cream (было #8c6f38 — 4.42:1). */
+  --gold-dark: #7d6231;
   --gold-light: #d9c08a;
   --accent-warm: #c9a961;
   --secondary-color: var(--gold);
@@ -13,13 +15,30 @@
   /* Нейтрали */
   --text-dark: #1c2733;
   --text-body: #3d4a5a;
-  --text-light: #5c6a7a;
+  /* Приглушённый текст: только на светлых фонах (--bg-white / --bg-cream).
+     На тёмно-синем и золотом берите --text-on-dark, иначе контраст падает
+     ниже AA. Значение затемнено с #5c6a7a ради запаса (сейчас 6.1:1 на cream). */
+  --text-light: #556271;
   --text-on-dark: #e8edf4;
   --bg-cream: #faf7f1;
   --bg-light: #f5f6f8;
   --bg-white: #ffffff;
   --border-subtle: #e4e0d8;
   --border-strong: #cfc9bd;
+
+  /* Фирменные цвета мессенджеров затемнены до AA с белым текстом:
+     оригинальные #25d366 / #0088cc дают 1.5:1 и 3.9:1. */
+  --whatsapp: #1a744c;
+  --whatsapp-hover: #14603f;
+  --telegram: #00699e;
+  --telegram-hover: #005b8c;
+
+  /* Фокус: одна обводка на весь сайт, чтобы её нельзя было забыть. */
+  --focus-ring-color: var(--gold-dark);
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  /* На тёмном фоне золотой контур сливается — там берём светлое золото. */
+  --focus-ring-color-on-dark: var(--gold-light);
 
   /* Шкала отступов */
   --space-1: 4px;
@@ -103,6 +122,58 @@ h1 {
 a {
   text-decoration: none;
   transition: var(--transition);
+}
+
+/* Единая видимая обводка фокуса для всего интерактивного.
+   Клавиатурная навигация не должна зависеть от того, вспомнили ли мы
+   про :focus-visible в каждом отдельном компоненте. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
+  outline: var(--focus-ring-width) solid var(--focus-ring-color);
+  outline-offset: var(--focus-ring-offset);
+  border-radius: var(--radius-sm);
+}
+
+/* На тёмно-синих блоках золото темнеет до нечитаемого — светлый вариант. */
+.hero a:focus-visible,
+.hero button:focus-visible,
+.modern-footer a:focus-visible,
+.modern-footer button:focus-visible {
+  outline-color: var(--focus-ring-color-on-dark);
+}
+
+/* Пользователь просил меньше движения — убираем анимации и сдвиги,
+   но не сам фокус и не смену цвета. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  /* Подъёмы и повороты на hover отключаем полностью, а не ускоряем. */
+  .service-card:hover,
+  .trust-card:hover,
+  .footer-social-link:hover,
+  .footer-social-link:focus-visible {
+    transform: none;
+  }
+
+  .faq-trigger[aria-expanded='true'] .faq-indicator {
+    transform: none;
+  }
 }
 
 .btn {

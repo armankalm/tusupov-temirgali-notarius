@@ -95,9 +95,12 @@ function App() {
 
       <TrustSection />
 
-      <div className="container services-section">
+      <section
+        className="container services-section"
+        aria-labelledby="services-title"
+      >
         <div className="text-center">
-          <h3>Нотариальные услуги</h3>
+          <h2 id="services-title">Нотариальные услуги</h2>
         </div>
         <div className="row g-4">
           {services.map((service, index) => (
@@ -112,13 +115,16 @@ function App() {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
       <Faq />
 
-      <div className="container-fluid location-section">
+      <section
+        className="container-fluid location-section"
+        aria-labelledby="location-title"
+      >
         <div className="text-center">
-          <h3>Расположение</h3>
+          <h2 id="location-title">Расположение</h2>
         </div>
         <div className="location-content">
           <figure className="location-figure">
@@ -170,10 +176,15 @@ function App() {
             </address>
           </div>
         </div>
-        <div className="mt-5" id="contact-form">
-          <ContactForm />
-        </div>
-      </div>
+      </section>
+
+      <section
+        className="mt-5"
+        id="contact-form"
+        aria-labelledby="contact-form-title"
+      >
+        <ContactForm />
+      </section>
     </div>
   );
 }

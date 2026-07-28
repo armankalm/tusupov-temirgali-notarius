@@ -85,13 +85,15 @@ function ContactForm() {
                 {isDataSent ? (
                     <div className="contact-form-success">
                         <SuccessIcon />
-                        <h3 className="contact-form-success-title">Отлично!</h3>
+                        {/* Тот же id, что и у заголовка формы: секция ссылается на него
+                            через aria-labelledby, и после отправки он не должен пропасть. */}
+                        <h2 className="contact-form-success-title" id="contact-form-title">Отлично!</h2>
                         <p className="contact-form-success-text">Данные успешно отправлены. Мы свяжемся с вами в ближайшее время.</p>
                     </div>
                 ) : (
                     <>
                         <div className="contact-form-header">
-                            <h3 className="contact-form-title">Свяжитесь с нами</h3>
+                            <h2 className="contact-form-title" id="contact-form-title">Свяжитесь с нами</h2>
                             <p className="contact-form-subtitle">
                                 Оставьте свои контактные данные и мы вам перезвоним
                             </p>

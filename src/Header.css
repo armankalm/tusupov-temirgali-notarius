@@ -130,22 +130,22 @@
 }
 
 .social-link.whatsapp {
-  background: #128c7e;
-  color: white;
+  background: var(--whatsapp);
+  color: #ffffff;
 }
 
 .social-link.whatsapp:hover {
-  background: #0e6f64;
+  background: var(--whatsapp-hover);
   box-shadow: var(--shadow-md);
 }
 
 .social-link.telegram {
-  background: #0088cc;
-  color: white;
+  background: var(--telegram);
+  color: #ffffff;
 }
 
 .social-link.telegram:hover {
-  background: #006c9f;
+  background: var(--telegram-hover);
   box-shadow: var(--shadow-md);
 }
 

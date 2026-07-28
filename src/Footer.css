@@ -131,22 +131,24 @@
 }
 
 .footer-social-link.whatsapp {
-  background: #128c7e;
-  color: white;
+  background: var(--whatsapp);
+  color: #ffffff;
 }
 
-.footer-social-link.whatsapp:hover {
-  background: #0e6f64;
+.footer-social-link.whatsapp:hover,
+.footer-social-link.whatsapp:focus-visible {
+  background: var(--whatsapp-hover);
   transform: translateY(-2px);
 }
 
 .footer-social-link.telegram {
-  background: #0088cc;
-  color: white;
+  background: var(--telegram);
+  color: #ffffff;
 }
 
-.footer-social-link.telegram:hover {
-  background: #006c9f;
+.footer-social-link.telegram:hover,
+.footer-social-link.telegram:focus-visible {
+  background: var(--telegram-hover);
   transform: translateY(-2px);
 }
 

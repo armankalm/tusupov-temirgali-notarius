@@ -20,9 +20,12 @@ function ruleBody(css, selector) {
   return match[1];
 }
 
-// Все @media-условия в файле — по ним проверяем направление вёрстки.
+// @media-условия про ширину вьюпорта — по ним проверяем направление вёрстки.
+// Запросы вроде prefers-reduced-motion к раскладке отношения не имеют.
 function mediaQueries(css) {
-  return [...css.matchAll(/@media([^{]+)\{/g)].map(([, query]) => query.trim());
+  return [...css.matchAll(/@media([^{]+)\{/g)]
+    .map(([, query]) => query.trim())
+    .filter((query) => /width/.test(query));
 }
 
 const MOBILE_FIRST_FILES = [
