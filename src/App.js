@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import ContactForm from "./ContactForm";
 import TrustSection from "./TrustSection";
 import Faq from "./Faq";
-import img1 from "./img/054f8a21-b5dd-4f7e-bef0-e0ca28309acd.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileContract, faHandshake, faScroll, faCheckCircle, faPen, faGavel, faRing, faCopy, faBalanceScale, faPhone, faCalendarCheck, faCertificate, faLocationDot, faDiamondTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
