@@ -115,7 +115,9 @@ function ContactForm() {
                             <div className="contact-form-group">
                                 <label className="contact-form-label" htmlFor="phone">Телефон</label>
                                 <input
-                                    type="text"
+                                    type="tel"
+                                    inputMode="tel"
+                                    autoComplete="tel"
                                     className={`contact-form-control ${formErrors.phone ? 'is-invalid' : ''}`}
                                     id="phone"
                                     name="phone"

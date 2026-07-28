@@ -1,3 +1,5 @@
+/* Mobile-first: базовая раскладка — центрированная колонка, расширения через min-width. */
+
 .modern-footer {
   background: var(--primary-dark);
   color: white;
@@ -17,13 +19,14 @@
 }
 
 .footer-main {
-  padding: 4rem 0 2rem;
+  padding: 3rem 0 1.5rem;
   position: relative;
   z-index: 1;
 }
 
 .footer-section {
   padding: 1rem 0;
+  text-align: center;
 }
 
 .footer-title {
@@ -33,6 +36,7 @@
   color: #ffffff;
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   padding-bottom: 0.75rem;
 }
@@ -41,7 +45,8 @@
   content: '';
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 50px;
   height: 3px;
   background: var(--gold);
@@ -77,6 +82,7 @@
 .footer-contact-item {
   display: flex;
   align-items: flex-start;
+  justify-content: center;
   gap: 0.75rem;
   margin-bottom: 1rem;
 }
@@ -92,6 +98,10 @@
   text-decoration: none;
   transition: var(--transition);
   font-weight: 600;
+  /* Тач-таргет: ссылка-строка сама по себе ниже 44px. */
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
 }
 
 .footer-link:hover {
@@ -102,6 +112,7 @@
 
 .footer-social {
   display: flex;
+  justify-content: center;
   gap: 1rem;
   margin-top: 1.5rem;
 }
@@ -153,35 +164,38 @@
   font-size: 0.9rem;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+.footer-bottom .row > div {
+  margin-bottom: 0.5rem;
+}
+
+/* От планшета колонки раскладываются в ряд — возвращаем выравнивание по левому краю */
+@media (min-width: 768px) {
   .footer-main {
-    padding: 3rem 0 1.5rem;
+    padding: 4rem 0 2rem;
   }
 
   .footer-section {
-    text-align: center;
+    text-align: left;
   }
 
   .footer-title {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .footer-title::after {
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
+    transform: none;
   }
 
   .footer-contact-item {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .footer-social {
-    justify-content: center;
+    justify-content: flex-start;
   }
 
   .footer-bottom .row > div {
-    text-align: center !important;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
   }
 }

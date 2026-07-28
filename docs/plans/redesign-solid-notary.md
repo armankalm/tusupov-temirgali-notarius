@@ -99,12 +99,12 @@
 - [x] Продублировать адрес и часы работы текстом рядом с картой (не только внутри iframe — поисковики не читают его содержимое) — блок `<address class="location-details">` с адресом и `contacts.schedule.lines`
 
 ### Task 10: Mobile-first проработка
-- [ ] Переписать медиазапросы на mobile-first (`min-width` вместо `max-width`) в `src/App.css`, `src/Header.css`, `src/Footer.css`
-- [ ] Вернуть sticky-хедер на мобилке (`src/Header.css:159` отключает `position: sticky`) в компактном виде: имя + кнопка звонка
-- [ ] Добавить плавающую кнопку звонка/WhatsApp внизу экрана на мобилке (скрыта на десктопе)
-- [ ] Довести все тач-таргеты до минимум 44×44px: `.social-link` в `src/Header.css` сейчас 28×28px
-- [ ] Проверить hero, услуги, FAQ и форму на 320px — отсутствие горизонтального скролла
-- [ ] Заменить `type="text"` на `type="tel"` с `inputMode="tel"` для поля телефона в `src/ContactForm.jsx`
+- [x] Переписать медиазапросы на mobile-first (`min-width` вместо `max-width`) в `src/App.css`, `src/Header.css`, `src/Footer.css` — базовые правила рассчитаны на 320px, расширения через `min-width: 768px/992px`; единственный `max-width` — верхняя граница диапазона «только планшет», уже открытого через `min-width`
+- [x] Вернуть sticky-хедер на мобилке (`src/Header.css:159` отключает `position: sticky`) в компактном виде: имя + кнопка звонка — `.header-compact` + `.header-call` (44×44), развёрнутые контакты и адрес раскрываются от 768px
+- [x] Добавить плавающую кнопку звонка/WhatsApp внизу экрана на мобилке (скрыта на десктопе) — `src/MobileCallBar.jsx` / `.css`, `position: fixed`, скрыт от `min-width: 992px`; под панель зарезервирован `padding-bottom` у `body` с `env(safe-area-inset-bottom)`
+- [x] Довести все тач-таргеты до минимум 44×44px: `.social-link` в `src/Header.css` сейчас 28×28px — подняты `.social-link`, `.icon-wrapper`, `.header-call`, `.footer-link`, `.faq-trigger`, поля и кнопка формы; покрыто параметризованным тестом
+- [x] Проверить hero, услуги, FAQ и форму на 320px — отсутствие горизонтального скролла: тест ловит любые фиксированные `width`/`min-width` больше 320px во всех CSS, плюс `overflow-x: hidden` у `body` как страховка
+- [x] Заменить `type="text"` на `type="tel"` с `inputMode="tel"` для поля телефона в `src/ContactForm.jsx` — добавлен и `autoComplete="tel"`
 
 ### Task 11: Доступность и финальная проверка
 - [ ] Проверить контраст всех текстовых пар по WCAG AA, поправить светло-серый `--text-light` на тёмных/цветных фонах

@@ -69,6 +69,17 @@ body {
   color: var(--text-body);
   background: var(--bg-cream);
   line-height: 1.65;
+  /* Плавающая панель связи фиксирована внизу — освобождаем под неё место,
+     иначе она перекрывает конец подвала. На десктопе панель скрыта. */
+  padding-bottom: calc(60px + env(safe-area-inset-bottom, 0px));
+  /* Ни один блок не должен вылезать за 320px по горизонтали. */
+  overflow-x: hidden;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-bottom: 0;
+  }
 }
 
 code {

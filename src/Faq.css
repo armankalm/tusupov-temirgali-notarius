@@ -40,7 +40,8 @@
   justify-content: space-between;
   gap: var(--space-4);
   width: 100%;
-  /* Тач-таргет не ниже 44px за счёт вертикальных отступов */
+  /* Тач-таргет не ниже 44px */
+  min-height: 44px;
   padding: var(--space-4) var(--space-2);
   background: none;
   border: 0;

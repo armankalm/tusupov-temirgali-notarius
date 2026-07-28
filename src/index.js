@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './Header';
 import Footer from './Footer';
+import MobileCallBar from './MobileCallBar';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -12,6 +13,7 @@ root.render(
     <Header />
     <App />
     <Footer />
+    <MobileCallBar />
   </React.StrictMode>
 );
 

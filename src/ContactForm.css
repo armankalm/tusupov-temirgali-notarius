@@ -44,6 +44,8 @@
 
 .contact-form-control {
   width: 100%;
+  /* Тач-таргет не меньше 44px */
+  min-height: 44px;
   padding: var(--space-3) var(--space-4);
   font-size: 1rem;
   font-family: var(--font-body);
@@ -93,6 +95,7 @@ textarea.contact-form-control {
 .contact-form-submit {
   display: block;
   width: 100%;
+  min-height: 44px;
   padding: var(--space-3) var(--space-6);
   font-size: 1.05rem;
   font-family: var(--font-body);
