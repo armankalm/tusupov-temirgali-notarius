@@ -30,8 +30,8 @@ function ContactForm() {
     });
 
     // Замените на ваш токен бота и chat_id
-    const telegramBotToken = '5891037070:AAGbClS8krZmUsG0ZIEMs7gvOAzBbhdM_GI';
-    const chatId = '1063624581';
+    const telegramBotToken = '';
+    const chatId = '';
 
     function handleChange(e) {
         const { name, value } = e.target;
