@@ -155,12 +155,14 @@
   font-size: 1rem;
 }
 
-.location-address {
+/* Скоупим под .modern-header: те же имена классов есть в секции «Расположение»
+   (App.css), а Header.css грузится позже и перебивал её стили. */
+.modern-header .location-address {
   font-size: 0.9rem;
   color: var(--text-light);
 }
 
-.location-details {
+.modern-header .location-details {
   text-align: left;
 }
 

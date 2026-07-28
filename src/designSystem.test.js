@@ -38,7 +38,7 @@ test('primary-палитра переведена на тёмно-синий, б
 });
 
 test('добавлены золотые и тёплые нейтральные токены', () => {
-  ['--gold', '--accent-warm', '--bg-cream', '--border-subtle'].forEach(
+  ['--gold', '--gold-dark', '--gold-light', '--bg-cream', '--border-subtle'].forEach(
     (name) => {
       expect(tokens[name]).toBeDefined();
     }
@@ -75,8 +75,24 @@ test('тени спокойные: три уровня, blur не больше 1
     const blur = parseInt(tokens[name].split(/\s+/)[2], 10);
     expect(blur).toBeLessThanOrEqual(16);
   });
-  // Прежний --shadow-xl с blur 25px больше не задаёт собственного значения.
-  expect(tokens['--shadow-xl']).toBe('var(--shadow-lg)');
+  // Прежний --shadow-xl с blur 25px удалён вместе с остальными мёртвыми токенами.
+  expect(tokens['--shadow-xl']).toBeUndefined();
+});
+
+test('в палитре нет токенов, которых никто не использует', () => {
+  // Мёртвый токен создаёт вид «ещё одного акцента» и провоцирует
+  // добавить непроверенную на контраст пару цветов.
+  const declared = Object.keys(tokens);
+  const componentCss = ['App.css', 'Header.css', 'Footer.css', 'Faq.css',
+    'TrustSection.css', 'ContactForm.css', 'MobileCallBar.css']
+    .map((file) => fs.readFileSync(path.join(__dirname, file), 'utf8'))
+    .join('\n');
+  const allCss = `${css}\n${componentCss}`;
+
+  const unused = declared.filter(
+    (name) => !new RegExp(`var\\(\\s*${name}\\b`).test(allCss)
+  );
+  expect(unused).toEqual([]);
 });
 
 test('заданы отдельные шрифты для заголовков и текста', () => {

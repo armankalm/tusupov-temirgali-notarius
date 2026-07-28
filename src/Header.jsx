@@ -14,8 +14,10 @@ export default function Header() {
             {/* На мобилке — компактная полоса: имя слева, кнопка звонка справа.
                 От 768px кнопка прячется, её роль берут развёрнутые контакты. */}
             <div className="header-compact">
+              {/* Не h1: единственный h1 страницы — заголовок hero-секции.
+                  В шапке это просто логотип-подпись. */}
               <div className="header-brand">
-                <h1 className="brand-name mb-1">{contacts.notary.fullName}</h1>
+                <p className="brand-name mb-1">{contacts.notary.fullName}</p>
                 <p className="brand-subtitle mb-0">
                   НОТАРИУС Г.{contacts.address.city.toUpperCase()}
                 </p>
@@ -41,13 +43,17 @@ export default function Header() {
                 </a>
                 <div className="social-icons mt-1">
                   <a href={contacts.phone.whatsappWithText}
-                     className="social-link whatsapp" target="_blank" rel="noopener noreferrer">
+                     className="social-link whatsapp" target="_blank" rel="noopener noreferrer"
+                     aria-label="Написать в WhatsApp">
                     <FontAwesomeIcon icon={faWhatsapp} />
                   </a>
-                  <a href={contacts.phone.telegram}
-                     className="social-link telegram" target="_blank" rel="noopener noreferrer">
-                    <FontAwesomeIcon icon={faTelegram} />
-                  </a>
+                  {contacts.phone.telegram && (
+                    <a href={contacts.phone.telegram}
+                       className="social-link telegram" target="_blank" rel="noopener noreferrer"
+                       aria-label="Написать в Telegram">
+                      <FontAwesomeIcon icon={faTelegram} />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

@@ -21,6 +21,8 @@ function SuccessIcon() {
 function ContactForm() {
     const [isDataSent, setIsDataSent] = useState(false);
     const [formErrors, setFormErrors] = useState({});
+    const [submitError, setSubmitError] = useState('');
+    const [isSending, setIsSending] = useState(false);
     const [formData, setFormData] = useState({
         name: '',
         phone: '',
@@ -32,51 +34,84 @@ function ContactForm() {
     const chatId = '1063624581';
 
     function handleChange(e) {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+        // Ошибку снимаем сразу, как только поле заполнили: иначе подсказка
+        // и aria-invalid висят на уже исправленном поле до следующей отправки.
+        setFormErrors((prev) => {
+            if (!prev[name] || !value.trim()) return prev;
+            const { [name]: _removed, ...rest } = prev;
+            return rest;
+        });
     }
 
     function validateForm() {
         let errors = {};
-        if (!formData.name) errors.name = 'Введите имя';
-        if (!formData.phone) errors.phone = 'Введите телефон';
-        if (!formData.message) errors.message = 'Введите сообщение';
+        if (!formData.name.trim()) errors.name = 'Введите имя';
+        if (!formData.phone.trim()) errors.phone = 'Введите телефон';
+        if (!formData.message.trim()) errors.message = 'Введите сообщение';
         return errors;
+    }
+
+    // Заявка уходит с parse_mode: 'HTML', поэтому «<», «>» и «&» из полей
+    // нужно экранировать — иначе Telegram отвечает 400 и заявка теряется.
+    function escapeHtml(value) {
+        return value
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
     }
 
     function Submit(e) {
         e.preventDefault();
+        if (isSending) return;
+
         const errors = validateForm();
-        if (Object.keys(errors).length === 0) {
-            const text = `Имя: ${formData.name}\nТелефон: ${formData.phone}\nСообщение: ${formData.message}`;
-
-            const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
-
-            const data = {
-                chat_id: chatId,
-                text: text,
-                parse_mode: 'HTML'
-            };
-
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => {
-                    if (response.ok) {
-                        setIsDataSent(true);
-                    } else {
-                        console.log('Ошибка при отправке сообщения');
-                    }
-                })
-                .catch(err => {
-                    console.log(err);
-                });
-        } else {
-            setFormErrors(errors);
+        setFormErrors(errors);
+        if (Object.keys(errors).length > 0) {
+            setSubmitError('');
+            return;
         }
+
+        const text =
+            `Имя: ${escapeHtml(formData.name)}\n` +
+            `Телефон: ${escapeHtml(formData.phone)}\n` +
+            `Сообщение: ${escapeHtml(formData.message)}`;
+
+        const url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage`;
+
+        const data = {
+            chat_id: chatId,
+            text: text,
+            parse_mode: 'HTML'
+        };
+
+        setIsSending(true);
+        setSubmitError('');
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response => {
+                if (response.ok) {
+                    setIsDataSent(true);
+                } else {
+                    throw new Error(`Telegram ответил ${response.status}`);
+                }
+            })
+            .catch(() => {
+                // Молча терять заявку нельзя: показываем ошибку и запасной канал связи.
+                setSubmitError(
+                    'Не удалось отправить заявку. Позвоните нам или напишите в WhatsApp.'
+                );
+            })
+            .finally(() => {
+                setIsSending(false);
+            });
     }
 
     return (
@@ -146,8 +181,17 @@ function ContactForm() {
                                 ></textarea>
                                 {formErrors.message && <span className="contact-form-error" id="message-error">{formErrors.message}</span>}
                             </div>
-                            <button type="submit" className="contact-form-submit">
-                                Отправить заявку
+                            {submitError && (
+                                <p className="contact-form-submit-error" role="alert">
+                                    {submitError}
+                                </p>
+                            )}
+                            <button
+                                type="submit"
+                                className="contact-form-submit"
+                                disabled={isSending}
+                            >
+                                {isSending ? 'Отправляем…' : 'Отправить заявку'}
                             </button>
                         </form>
                     </>

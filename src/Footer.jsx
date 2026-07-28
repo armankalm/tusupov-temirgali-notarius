@@ -45,12 +45,14 @@ export default function Footer() {
                   <a href={`mailto:${contacts.email}`} className="footer-link">{contacts.email}</a>
                 </div>
                 <div className="footer-social">
-                  <a href={contacts.phone.whatsapp} className="footer-social-link whatsapp" target="_blank" rel="noopener noreferrer">
+                  <a href={contacts.phone.whatsappWithText} className="footer-social-link whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Написать в WhatsApp">
                     <FontAwesomeIcon icon={faWhatsapp} />
                   </a>
-                  <a href={contacts.phone.telegram} className="footer-social-link telegram" target="_blank" rel="noopener noreferrer">
-                    <FontAwesomeIcon icon={faTelegram} />
-                  </a>
+                  {contacts.phone.telegram && (
+                    <a href={contacts.phone.telegram} className="footer-social-link telegram" target="_blank" rel="noopener noreferrer" aria-label="Написать в Telegram">
+                      <FontAwesomeIcon icon={faTelegram} />
+                    </a>
+                  )}
                 </div>
               </div>
             </div>

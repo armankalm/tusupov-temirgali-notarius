@@ -74,6 +74,33 @@ test('статус приёма вычисляется по графику', () 
   expect(sunday.label).toMatch(/выходной/);
 });
 
+test('границы интервалов: открытие, обед и закрытие ровно по часам', () => {
+  // Понедельник. Пиним сравнения >= / <, иначе перевёрнутый оператор
+  // остаётся незамеченным при проверке только середины интервала.
+  const at = (h, m = 0) => getWorkStatus(new Date(2026, 6, 27, h, m)).state;
+  expect(at(8, 59)).toBe('closed');
+  expect(at(9, 0)).toBe('open');
+  expect(at(12, 59)).toBe('open');
+  expect(at(13, 0)).toBe('lunch');
+  expect(at(13, 59)).toBe('lunch');
+  expect(at(14, 0)).toBe('open');
+  expect(at(17, 59)).toBe('open');
+  expect(at(18, 0)).toBe('closed');
+});
+
+test('после закрытия подсказка называет реальный день следующего приёма', () => {
+  // Суббота 19:00: завтра воскресенье — «откроемся в 9:00» ввело бы в заблуждение.
+  const saturdayEvening = getWorkStatus(new Date(2026, 6, 25, 19, 0));
+  expect(saturdayEvening.state).toBe('closed');
+  expect(saturdayEvening.label).toMatch(/понедельник/);
+
+  // Понедельник 19:00 — приём завтра.
+  expect(getWorkStatus(new Date(2026, 6, 27, 19, 0)).label).toMatch(/завтра/);
+
+  // Понедельник 8:00 — откроемся сегодня же.
+  expect(getWorkStatus(new Date(2026, 6, 27, 8, 0)).label).toMatch(/в 9:00/);
+});
+
 test('hero не использует градиент и SVG-паттерн из старого шаблона', () => {
   const css = require('fs').readFileSync(
     require('path').join(__dirname, 'App.css'),
@@ -193,8 +220,35 @@ test('конфиг собирает адрес и ссылки на телефо
   expect(contacts.address.full).toBe('г. Караганда, проспект Бухар жырау, строение 49');
   expect(contacts.address.lineShort).toBe('пр. Бухар жырау, стр. 49');
   expect(contacts.phone.tel).toBe('tel:+77057372926');
-  expect(contacts.phone.whatsapp).toContain('+77057372926');
-  expect(contacts.phone.telegram).toContain('+77057372926');
+  // wa.me принимает только цифры: ведущий «+» даёт битую ссылку.
+  expect(contacts.phone.whatsappWithText).toContain('wa.me/77057372926?text=');
+  expect(contacts.phone.whatsappWithText).not.toContain('wa.me/+');
+});
+
+test('ссылка на Telegram не собирается из номера телефона', () => {
+  // t.me/<номер> — не адрес пользователя, а битая ссылка: путь t.me
+  // принимает только @username или invite-хэш. Пока username неизвестен,
+  // ссылки нет вовсе — битую отдавать хуже, чем не отдавать никакой.
+  const { telegram } = contacts.phone;
+  const isValidOrAbsent =
+    telegram === null || /^https:\/\/t\.me\/[A-Za-z][\w]{4,}$/.test(telegram);
+
+  expect({ telegram, isValidOrAbsent }).toEqual({
+    telegram,
+    isValidOrAbsent: true,
+  });
+});
+
+test('битая ссылка на Telegram не рендерится ни в шапке, ни в подвале', () => {
+  render(<Header />);
+  render(<Footer />);
+  const hrefs = screen
+    .queryAllByRole('link')
+    .map((link) => link.getAttribute('href') || '')
+    .filter((href) => href.includes('t.me'));
+
+  // Ни одной ссылки вида t.me/+77057372926 в разметке быть не должно.
+  expect(hrefs.filter((href) => /t\.me\/\+?\d/.test(href))).toEqual([]);
 });
 
 test('график покрывает Пн-Сб 9-18 с обедом 13-14 и выходным в воскресенье', () => {

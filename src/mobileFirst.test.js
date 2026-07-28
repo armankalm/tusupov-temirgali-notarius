@@ -151,14 +151,19 @@ describe('тач-таргеты не меньше 44px', () => {
 
 test('на 320px ничего не выпирает: фиксированных ширин больше вьюпорта нет', () => {
   // Ловим width/min-width в пикселях, которые не поместятся в 320px минус паддинги.
-  MOBILE_FIRST_FILES.concat('index.css').forEach((file) => {
-    const css = readCss(file);
-    [...css.matchAll(/(?:^|[\s;{])(min-)?width:\s*(\d+)px/g)].forEach(
-      ([, , px]) => {
-        expect(Number(px)).toBeLessThanOrEqual(320);
-      }
-    );
+  // Только width/min-width: max-width сам по себе ширину не навязывает.
+  // Свойства с суффиксом (stroke-width, border-width) не считаем — отсюда \b(?<!-).
+  const tooWide = MOBILE_FIRST_FILES.concat('index.css').flatMap((file) => {
+    // Медиазапросы вырезаем: (min-width: 768px) — это условие, а не ширина блока.
+    const declarations = readCss(file).replace(/@media[^{]*\{/g, '{');
+    return [
+      ...declarations.matchAll(/(?:^|[\s;{])(min-width|width):\s*(\d+)px/g),
+    ]
+      .filter(([, , px]) => Number(px) > 320)
+      .map(([, prop, px]) => `${file}: ${prop}: ${px}px`);
   });
+
+  expect(tooWide).toEqual([]);
 
   // Страховка от горизонтального скролла на узких экранах.
   expect(ruleBody(readCss('index.css'), 'body')).toMatch(/overflow-x:\s*hidden/);

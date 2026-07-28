@@ -30,8 +30,6 @@ test('плитки покрывают лицензию, стаж, конфиде
 test('стаж считается от года начала практики, а не хардкодится', () => {
   expect(PRACTICE_SINCE).toBe(2010);
   expect(contacts.notary.licenseSince).toBe(PRACTICE_SINCE);
-  expect(getYearsOfPractice(new Date(2026, 0, 1))).toBe(16);
-  expect(getYearsOfPractice(new Date(2031, 0, 1))).toBe(21);
 
   // Число в разметке совпадает с вычисленным на текущий год.
   render(<TrustSection />);
@@ -40,7 +38,18 @@ test('стаж считается от года начала практики, �
   ).toBeInTheDocument();
 });
 
+test('год стажа засчитывается только после годовщины лицензии (28 декабря)', () => {
+  // Лицензия от 28.12.2010 — до этой даты в году стаж на год меньше,
+  // иначе сайт юриста завышает опыт почти 11 месяцев из 12.
+  expect(getYearsOfPractice(new Date(2026, 0, 1))).toBe(15);
+  expect(getYearsOfPractice(new Date(2026, 11, 27))).toBe(15);
+  expect(getYearsOfPractice(new Date(2026, 11, 28))).toBe(16);
+  expect(getYearsOfPractice(new Date(2026, 11, 31))).toBe(16);
+  expect(getYearsOfPractice(new Date(2027, 0, 1))).toBe(16);
+});
+
 test('склонение лет: год / года / лет', () => {
+  expect(pluralizeYears(0)).toBe('лет');
   expect(pluralizeYears(1)).toBe('год');
   expect(pluralizeYears(21)).toBe('год');
   expect(pluralizeYears(2)).toBe('года');
@@ -57,9 +66,9 @@ test('склонение лет: год / года / лет', () => {
 });
 
 test('формат стажа склеивает число и склонение', () => {
-  expect(formatYearsOfPractice(new Date(2026, 0, 1))).toBe('16 лет');
-  expect(formatYearsOfPractice(new Date(2031, 0, 1))).toBe('21 год');
-  expect(formatYearsOfPractice(new Date(2032, 0, 1))).toBe('22 года');
+  expect(formatYearsOfPractice(new Date(2026, 11, 28))).toBe('16 лет');
+  expect(formatYearsOfPractice(new Date(2031, 11, 28))).toBe('21 год');
+  expect(formatYearsOfPractice(new Date(2032, 11, 28))).toBe('22 года');
 });
 
 test('секция доступна: aria-labelledby связан с заголовком', () => {

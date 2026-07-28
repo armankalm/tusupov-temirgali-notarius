@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ContactForm from "./ContactForm";
@@ -10,7 +11,14 @@ import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { contacts, getWorkStatus } from "./config/contacts";
 
 function Hero() {
-  const status = getWorkStatus();
+  // Статус считается от часов посетителя, поэтому во вкладке, открытой надолго,
+  // он устаревает — пересчитываем раз в минуту.
+  const [status, setStatus] = useState(() => getWorkStatus());
+
+  useEffect(() => {
+    const timer = setInterval(() => setStatus(getWorkStatus()), 60_000);
+    return () => clearInterval(timer);
+  }, []);
 
   function scrollToForm(e) {
     e.preventDefault();

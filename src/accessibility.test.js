@@ -134,9 +134,10 @@ describe('видимый фокус для интерактивных элеме
       'MobileCallBar.css',
     ];
 
+    // Ловим и :focus, и :focus-visible — гасить обводку можно в любом из них.
     const offenders = componentCss.flatMap((file) => {
       const css = readCss(file);
-      return [...css.matchAll(/([^{}]+):focus-visible[^{]*\{([^}]*)\}/g)]
+      return [...css.matchAll(/([^{}]*:focus(?:-visible)?[^{}]*)\{([^}]*)\}/g)]
         .filter(
           ([, , body]) =>
             /outline:\s*none/.test(body) &&
@@ -146,6 +147,20 @@ describe('видимый фокус для интерактивных элеме
     });
 
     expect(offenders).toEqual([]);
+  });
+
+  test('правило, гасящее обводку, действительно найдено сканером', () => {
+    // Страховка от «зелёного по недосмотру»: если регулярка перестанет видеть
+    // :focus-правила, этот тест упадёт раньше, чем сканер молча опустеет.
+    const focusRules = [
+      ...readCss('ContactForm.css').matchAll(
+        /([^{}]*:focus(?:-visible)?[^{}]*)\{([^}]*)\}/g
+      ),
+    ].filter(([, , body]) => /outline:\s*none/.test(body));
+
+    expect(focusRules).toHaveLength(1);
+    // И оно освобождено от претензий только потому, что даёт свой индикатор.
+    expect(focusRules[0][2]).toMatch(/box-shadow:/);
   });
 });
 
