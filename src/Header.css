@@ -1,13 +1,11 @@
 .modern-header {
-  background: linear-gradient(135deg, #ffffff 0%, #f9fafb 100%);
+  background: var(--bg-white);
   padding: 1.5rem 0;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-shadow: var(--shadow-sm);
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: 3px solid transparent;
-  border-image: linear-gradient(90deg, #1e3a8a, #3b82f6, #1e3a8a) 1;
-  backdrop-filter: blur(10px);
+  border-bottom: 2px solid var(--gold);
 }
 
 .header-brand {
@@ -16,14 +14,10 @@
 
 .brand-name {
   font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--primary-dark);
+  font-weight: 600;
+  color: var(--primary-color);
   margin: 0;
-  letter-spacing: -0.5px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  letter-spacing: -0.01em;
 }
 
 .brand-subtitle {
@@ -42,20 +36,20 @@
 .icon-wrapper {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  border-radius: var(--radius-md);
+  background: var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--gold-light);
   font-size: 1.2rem;
-  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+  box-shadow: var(--shadow-sm);
   transition: var(--transition);
 }
 
 .icon-wrapper:hover {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 6px 16px rgba(30, 58, 138, 0.4);
+  background: var(--primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .contact-link {
@@ -68,8 +62,9 @@
 }
 
 .contact-link:hover {
-  color: var(--primary-light);
-  transform: translateX(3px);
+  color: var(--gold-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .social-icons {
@@ -87,27 +82,27 @@
   text-decoration: none;
   transition: var(--transition);
   font-size: 0.9rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow-sm);
 }
 
 .social-link.whatsapp {
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  background: #128c7e;
   color: white;
 }
 
 .social-link.whatsapp:hover {
-  transform: scale(1.15) rotate(-5deg);
-  box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+  background: #0e6f64;
+  box-shadow: var(--shadow-md);
 }
 
 .social-link.telegram {
-  background: linear-gradient(135deg, #0088cc 0%, #005f8c 100%);
+  background: #0088cc;
   color: white;
 }
 
 .social-link.telegram:hover {
-  transform: scale(1.15) rotate(5deg);
-  box-shadow: 0 4px 12px rgba(0, 136, 204, 0.4);
+  background: #006c9f;
+  box-shadow: var(--shadow-md);
 }
 
 .location-city {

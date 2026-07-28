@@ -47,14 +47,14 @@
 - [x] Сократить `--transition` до `0.2s ease` и убрать глобальный `.btn:hover { transform: translateY(-2px) }`
 
 ### Task 4: Убрать визуальный шум и градиенты
-- [ ] Убрать `rotate()` из всех hover-эффектов: `src/Header.css` (`.icon-wrapper`, `.social-link.whatsapp`, `.social-link.telegram`), `src/App.css` (`.service-card:hover .fa-2x`), `src/Footer.css` (`.footer-social-link`)
-- [ ] Убрать `transform: translateX(3px)` с `.contact-link:hover` и `.footer-link:hover` — заменить на смену цвета/подчёркивание
-- [ ] Заменить градиентный текст на сплошной цвет: `.brand-name` в `src/Header.css` (убрать `-webkit-text-fill-color: transparent`), заголовок формы в `src/ContactForm.jsx`
-- [ ] Заменить `linear-gradient` фоны на сплошные/едва заметные тона: `.about-lawyer`, `.location-section` в `src/App.css`, `.modern-header` в `src/Header.css`
-- [ ] Заменить градиентные подчёркивания `h3::after` в `src/App.css` на сплошную золотую линию
-- [ ] Заменить `border-image: linear-gradient(...)` в `.modern-header` на обычный `border-bottom`
-- [ ] Удалить неиспользуемый класс `.fade-in` и `@keyframes fadeIn` из `src/App.css` (либо применить его к секциям)
-- [ ] Уменьшить `service-card:hover` подъём с `translateY(-10px)` до `-4px`
+- [x] Убрать `rotate()` из всех hover-эффектов: `src/Header.css` (`.icon-wrapper`, `.social-link.whatsapp`, `.social-link.telegram`), `src/App.css` (`.service-card:hover .fa-2x`), `src/Footer.css` (`.footer-social-link`)
+- [x] Убрать `transform: translateX(3px)` с `.contact-link:hover` и `.footer-link:hover` — заменить на смену цвета/подчёркивание
+- [x] Заменить градиентный текст на сплошной цвет: `.brand-name` в `src/Header.css` (убрать `-webkit-text-fill-color: transparent`), заголовок формы в `src/ContactForm.jsx`
+- [x] Заменить `linear-gradient` фоны на сплошные/едва заметные тона: `.about-lawyer`, `.location-section` в `src/App.css`, `.modern-header` в `src/Header.css`. Дополнительно сняты градиенты с `.modern-footer`, соц-кнопок и submit-кнопки формы
+- [x] Заменить градиентные подчёркивания `h3::after` в `src/App.css` на сплошную золотую линию (то же для `.footer-title::after`)
+- [x] Заменить `border-image: linear-gradient(...)` в `.modern-header` на обычный `border-bottom`
+- [x] Удалить неиспользуемый класс `.fade-in` и `@keyframes fadeIn` из `src/App.css` (либо применить его к секциям)
+- [x] Уменьшить `service-card:hover` подъём с `translateY(-10px)` до `-4px`
 
 ### Task 5: Вынести инлайн-стили формы в CSS
 - [ ] Создать `src/ContactForm.css` со стилями карточки, инпутов, лейблов, кнопки и success-блока

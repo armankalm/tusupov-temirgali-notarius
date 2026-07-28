@@ -83,11 +83,8 @@ function ContactForm() {
                         <div className="text-center mb-4">
                             <h3 style={{
                                 fontSize: '2rem',
-                                fontWeight: '800',
-                                background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
-                                WebkitBackgroundClip: 'text',
-                                WebkitTextFillColor: 'transparent',
-                                backgroundClip: 'text',
+                                fontWeight: '600',
+                                color: 'var(--primary-color)',
                                 marginBottom: '0.5rem'
                             }}>
                                 Свяжитесь с нами
@@ -169,7 +166,7 @@ function ContactForm() {
                                     type="submit"
                                     className="btn btn-lg"
                                     style={{
-                                        background: 'linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%)',
+                                        background: 'var(--primary-color)',
                                         border: 'none',
                                         color: 'white',
                                         padding: '0.875rem 2rem',

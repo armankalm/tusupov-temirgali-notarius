@@ -1,6 +1,6 @@
 /* Hero Section */
 .about-lawyer {
-  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  background: var(--primary-color);
   color: white !important;
   padding: 80px 0 !important;
   position: relative;
@@ -60,9 +60,9 @@
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-  border-radius: 2px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: var(--radius-sm);
 }
 
 /* Service Cards */
@@ -71,14 +71,14 @@
   overflow: hidden;
   transition: var(--transition);
   background: white;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border-subtle);
   height: 100%;
 }
 
 .service-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--primary-light);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold);
 }
 
 .service-card .card-body {
@@ -92,8 +92,7 @@
 }
 
 .service-card:hover .fa-2x {
-  transform: scale(1.2) rotate(5deg);
-  color: var(--secondary-color);
+  color: var(--gold-dark);
 }
 
 .service-card .card-title {
@@ -111,7 +110,7 @@
 
 /* Location Section */
 .location-section {
-  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  background: var(--bg-cream);
   padding: 80px 0;
 }
 
@@ -130,9 +129,9 @@
   left: 50%;
   transform: translateX(-50%);
   width: 80px;
-  height: 4px;
-  background: linear-gradient(90deg, var(--primary-color), var(--primary-light));
-  border-radius: 2px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: var(--radius-sm);
 }
 
 .location-content {
@@ -161,22 +160,6 @@
   border-radius: var(--border-radius);
   box-shadow: var(--shadow-lg);
   border: none;
-}
-
-/* Animations */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.6s ease-out;
 }
 
 /* Responsive Design */

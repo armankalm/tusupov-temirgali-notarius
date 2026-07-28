@@ -1,5 +1,5 @@
 .modern-footer {
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  background: var(--primary-dark);
   color: white;
   position: relative;
   overflow: hidden;
@@ -44,14 +44,14 @@
   left: 0;
   width: 50px;
   height: 3px;
-  background: linear-gradient(90deg, #3b82f6, #60a5fa);
-  border-radius: 2px;
+  background: var(--gold);
+  border-radius: var(--radius-sm);
 }
 
 .footer-brand {
   font-size: 1.1rem;
   font-weight: 700;
-  color: #60a5fa;
+  color: var(--gold-light);
 }
 
 .footer-text {
@@ -62,15 +62,15 @@
 }
 
 .footer-license {
-  background: rgba(59, 130, 246, 0.1);
+  background: rgba(176, 141, 71, 0.12);
   padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border-left: 3px solid #3b82f6;
+  border-radius: var(--radius-md);
+  border-left: 3px solid var(--gold);
   margin-top: 1rem;
 }
 
 .footer-license small {
-  color: #93c5fd;
+  color: var(--gold-light);
   font-size: 0.85rem;
 }
 
@@ -82,7 +82,7 @@
 }
 
 .footer-icon {
-  color: #3b82f6;
+  color: var(--gold);
   font-size: 1.1rem;
   margin-top: 0.2rem;
 }
@@ -95,8 +95,9 @@
 }
 
 .footer-link:hover {
-  color: #60a5fa;
-  transform: translateX(3px);
+  color: var(--gold-light);
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .footer-social {
@@ -119,23 +120,23 @@
 }
 
 .footer-social-link.whatsapp {
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  background: #128c7e;
   color: white;
 }
 
 .footer-social-link.whatsapp:hover {
-  transform: translateY(-5px) rotate(-5deg);
-  box-shadow: 0 8px 20px rgba(37, 211, 102, 0.5);
+  background: #0e6f64;
+  transform: translateY(-2px);
 }
 
 .footer-social-link.telegram {
-  background: linear-gradient(135deg, #0088cc 0%, #005f8c 100%);
+  background: #0088cc;
   color: white;
 }
 
 .footer-social-link.telegram:hover {
-  transform: translateY(-5px) rotate(5deg);
-  box-shadow: 0 8px 20px rgba(0, 136, 204, 0.5);
+  background: #006c9f;
+  transform: translateY(-2px);
 }
 
 .footer-bottom {
