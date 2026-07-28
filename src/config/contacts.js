@@ -30,6 +30,12 @@ export const contacts = {
     get full() {
       return `${this.cityPrefixed}, ${this.street}, ${this.building}`;
     },
+    // Маршрут в Google Maps по тому же адресу, что и в embed-карте.
+    get directionsUrl() {
+      return `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(
+        this.full
+      )}`;
+    },
   },
 
   phone: {

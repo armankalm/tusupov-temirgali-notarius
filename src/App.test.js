@@ -48,9 +48,11 @@ test('hero содержит CTA: позвонить, WhatsApp и запись с
 
 test('hero показывает бейдж статуса и часы работы, включая обед и выходной', () => {
   render(<App />);
+  const hero = screen.getByRole('region', { name: contacts.notary.fullName });
   expect(screen.getByText(getWorkStatus().label)).toBeInTheDocument();
+  // График дублируется у карты — ищем именно в hero.
   contacts.schedule.lines.forEach((line) => {
-    expect(screen.getByText(line)).toBeInTheDocument();
+    expect(within(hero).getByText(line)).toBeInTheDocument();
   });
 });
 
@@ -88,6 +90,76 @@ test('карта указывает на новый адрес и не соде�
   const map = screen.getByTitle(new RegExp(contacts.address.full));
   expect(map.getAttribute('src')).toContain(encodeURIComponent(contacts.address.full));
   expect(map.getAttribute('src')).not.toMatch(/71\.379|42\.901/);
+});
+
+test('карта тянется контейнером с aspect-ratio, без фиксированных width/height', () => {
+  render(<App />);
+  const map = screen.getByTitle(new RegExp(contacts.address.full));
+  expect(map).not.toHaveAttribute('width');
+  expect(map).not.toHaveAttribute('height');
+
+  const css = require('fs').readFileSync(
+    require('path').join(__dirname, 'App.css'),
+    'utf8'
+  );
+  const frame = css.match(/\.location-map-frame\s*\{([\s\S]*?)\}/)[1];
+  expect(frame).toMatch(/aspect-ratio/);
+});
+
+test('фото здания описано адресом, ленивое и с размерами против CLS', () => {
+  render(<App />);
+  const photo = screen.getByRole('img', {
+    name: new RegExp(contacts.address.full),
+  });
+  expect(photo).toHaveAttribute('loading', 'lazy');
+  expect(photo).toHaveAttribute('width', '960');
+  expect(photo).toHaveAttribute('height', '1280');
+  expect(photo.getAttribute('alt')).not.toBe('Location');
+});
+
+test('рядом с картой продублированы адрес и график текстом', () => {
+  render(<App />);
+  const details = screen.getByRole('group', { name: /Адрес и часы работы/ });
+  expect(details).toHaveTextContent(contacts.address.full);
+  contacts.schedule.lines.forEach((line) => {
+    expect(within(details).getByText(line)).toBeInTheDocument();
+  });
+});
+
+test('под картой есть ссылка «Построить маршрут» на новый адрес', () => {
+  render(<App />);
+  const route = screen.getByRole('link', { name: /Построить маршрут/ });
+  expect(route).toHaveAttribute('href', contacts.address.directionsUrl);
+  expect(route.getAttribute('href')).toContain(
+    encodeURIComponent(contacts.address.full)
+  );
+  expect(route).toHaveAttribute('rel', expect.stringContaining('noopener'));
+});
+
+test('фото и карта выровнены сеткой, а не flex-wrap с разными размерами', () => {
+  const css = require('fs').readFileSync(
+    require('path').join(__dirname, 'App.css'),
+    'utf8'
+  );
+  const content = css.match(/\.location-content\s*\{([\s\S]*?)\}/)[1];
+  expect(content).toMatch(/display:\s*grid/);
+  expect(content).not.toMatch(/flex-wrap/);
+  // На широком экране — две равные колонки, растянутые по высоте.
+  expect(css).toMatch(/@media \(min-width: 992px\)[\s\S]*?grid-template-columns:\s*1fr 1fr/);
+});
+
+test('карточки услуг одной высоты и без вращения иконки на hover', () => {
+  const css = require('fs').readFileSync(
+    require('path').join(__dirname, 'App.css'),
+    'utf8'
+  );
+  const body = css.match(/\.service-card \.card-body\s*\{([\s\S]*?)\}/)[1];
+  expect(body).toMatch(/display:\s*flex/);
+  expect(body).toMatch(/flex-direction:\s*column/);
+  expect(css).toMatch(/\.service-card \.card-text\s*\{[\s\S]*?flex-grow:\s*1/);
+  // Иконка на hover меняет только цвет.
+  const iconHover = css.match(/\.service-card:hover \.fa-2x\s*\{([\s\S]*?)\}/)[1];
+  expect(iconHover).not.toMatch(/rotate|transform/);
 });
 
 test('шапка показывает Караганду и телефон из конфига', () => {

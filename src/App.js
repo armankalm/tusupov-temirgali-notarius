@@ -5,7 +5,7 @@ import TrustSection from "./TrustSection";
 import Faq from "./Faq";
 import img1 from "./img/054f8a21-b5dd-4f7e-bef0-e0ca28309acd.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFileContract, faHandshake, faScroll, faCheckCircle, faPen, faGavel, faRing, faCopy, faBalanceScale, faPhone, faCalendarCheck, faCertificate } from '@fortawesome/free-solid-svg-icons';
+import { faFileContract, faHandshake, faScroll, faCheckCircle, faPen, faGavel, faRing, faCopy, faBalanceScale, faPhone, faCalendarCheck, faCertificate, faLocationDot, faDiamondTurnRight } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { contacts, getWorkStatus } from "./config/contacts";
 
@@ -102,7 +102,7 @@ function App() {
         <div className="row g-4">
           {services.map((service, index) => (
             <div className="col-md-6 col-lg-4" key={index}>
-              <div className="service-card card shadow h-100 text-center">
+              <div className="service-card card h-100 text-center">
                 <div className="card-body">
                   <FontAwesomeIcon icon={service.icon} className="fa-2x" />
                   <h5 className="card-title">{service.title}</h5>
@@ -121,16 +121,54 @@ function App() {
           <h3>Расположение</h3>
         </div>
         <div className="location-content">
-          <img src={img1} alt="Location" className="location-image" />
-          <iframe
-            src={mapEmbedUrl}
-            width="500"
-            height="670"
-            className="location-map"
-            allowFullScreen=""
-            loading="lazy"
-            title={`Карта расположения: ${contacts.address.full}`}
-          ></iframe>
+          <figure className="location-figure">
+            <img
+              src={img1}
+              alt={`Вход в нотариальную контору: ${contacts.address.full}`}
+              className="location-image"
+              width="960"
+              height="1280"
+              loading="lazy"
+            />
+          </figure>
+
+          <div className="location-map-column">
+            <div className="location-map-frame">
+              <iframe
+                src={mapEmbedUrl}
+                className="location-map"
+                allowFullScreen=""
+                loading="lazy"
+                title={`Карта расположения: ${contacts.address.full}`}
+              ></iframe>
+            </div>
+
+            {/* Адрес и график дублируются текстом: содержимое iframe поисковики не читают. */}
+            <address
+              className="location-details"
+              role="group"
+              aria-label="Адрес и часы работы"
+            >
+              <p className="location-address">
+                <FontAwesomeIcon icon={faLocationDot} aria-hidden="true" />
+                {contacts.address.full}
+              </p>
+              <ul className="location-hours">
+                {contacts.schedule.lines.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+              <a
+                className="location-route"
+                href={contacts.address.directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FontAwesomeIcon icon={faDiamondTurnRight} aria-hidden="true" />
+                Построить маршрут
+              </a>
+            </address>
+          </div>
         </div>
         <div className="mt-5" id="contact-form">
           <ContactForm />
