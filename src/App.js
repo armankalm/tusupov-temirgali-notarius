@@ -4,8 +4,15 @@ import ContactForm from "./ContactForm";
 import img1 from "./img/054f8a21-b5dd-4f7e-bef0-e0ca28309acd.jpg";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileContract, faHandshake, faScroll, faCheckCircle, faPen, faGavel, faRing, faCopy, faBalanceScale } from '@fortawesome/free-solid-svg-icons';
+import { contacts } from "./config/contacts";
 
 function App() {
+  // Google Maps embed без API-ключа: поисковый запрос по актуальному адресу,
+  // чтобы не хранить координаты руками.
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(
+    contacts.address.full
+  )}&hl=ru&z=17&output=embed`;
+
   const services = [
     { title: "Договоры", text: "Купля-продажа, дарение, мена, ипотека и др.", icon: faFileContract },
     { title: "Доверенности", text: "Представительство в суде, управление и распоряжение автомобилем и др.", icon: faHandshake },
@@ -22,10 +29,11 @@ function App() {
     <div>
       <div className="container-fluid about-lawyer">
         <div className="container">
-          <h2>НОТАРИУС</h2>
-          <p className="fs-4 mb-2">ТУСУПОВ ТЕМИРГАЛИ РАСОВИЧ</p>
+          <h2>{contacts.notary.title}</h2>
+          <p className="fs-4 mb-2">{contacts.notary.fullName.toUpperCase()}</p>
           <p style={{ maxWidth: '800px', margin: '0 auto' }}>
-            Действует на основании Лицензии №0003207 выданной Министерством юстиции Республики Казахстан от 28 декабря 2010 года.
+            Действует на основании Лицензии №{contacts.notary.licenseNumber} выданной
+            Министерством юстиции Республики Казахстан от {contacts.notary.licenseDate}.
           </p>
         </div>
       </div>
@@ -56,13 +64,13 @@ function App() {
         <div className="location-content">
           <img src={img1} alt="Location" className="location-image" />
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1228.8284795555096!2d71.37932722728704!3d42.90105344041287!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38a7032af88884af%3A0xdceece04849a633a!2zNTMsINCi06nQu9C1INCR0Lgg0LrTqdGI0LXRgdGWLCDQotCw0YDQsNC3!5e0!3m2!1sru!2skz!4v1725276759423!5m2!1sru!2skz"
+            src={mapEmbedUrl}
             width="500"
             height="670"
             className="location-map"
             allowFullScreen=""
             loading="lazy"
-            title="Карта расположения"
+            title={`Карта расположения: ${contacts.address.full}`}
           ></iframe>
         </div>
         <div className="mt-5">

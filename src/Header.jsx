@@ -2,6 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp, faTelegram } from '@fortawesome/free-brands-svg-icons';
 import { faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { contacts } from './config/contacts';
 import './Header.css';
 
 export default function Header() {
@@ -11,8 +12,10 @@ export default function Header() {
         <div className="row align-items-center g-3">
           <div className="col-lg-4 col-md-12 text-center text-lg-start">
             <div className="header-brand">
-              <h1 className="brand-name mb-1">Тусупов Темиргали Расович</h1>
-              <p className="brand-subtitle mb-0">НОТАРИУС Г.ТАРАЗ</p>
+              <h1 className="brand-name mb-1">{contacts.notary.fullName}</h1>
+              <p className="brand-subtitle mb-0">
+                НОТАРИУС Г.{contacts.address.city.toUpperCase()}
+              </p>
             </div>
           </div>
 
@@ -22,15 +25,15 @@ export default function Header() {
                 <FontAwesomeIcon icon={faPhone} />
               </div>
               <div className="contact-details">
-                <a href="tel:+77057372926" className="contact-link">
-                  +7 (705) 737 2926
+                <a href={contacts.phone.tel} className="contact-link">
+                  {contacts.phone.display}
                 </a>
                 <div className="social-icons mt-1">
-                  <a href="https://wa.me/+77057372926?text=Здравствуйте,%20интересуют%20нотариальные%20услуги."
+                  <a href={contacts.phone.whatsappWithText}
                      className="social-link whatsapp" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faWhatsapp} />
                   </a>
-                  <a href="https://t.me/+77057372926"
+                  <a href={contacts.phone.telegram}
                      className="social-link telegram" target="_blank" rel="noopener noreferrer">
                     <FontAwesomeIcon icon={faTelegram} />
                   </a>
@@ -45,8 +48,8 @@ export default function Header() {
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
               </div>
               <div className="location-details">
-                <p className="location-city mb-0">г.Тараз</p>
-                <p className="location-address mb-0">ул.Толе Би, 53</p>
+                <p className="location-city mb-0">{contacts.address.cityPrefixed}</p>
+                <p className="location-address mb-0">{contacts.address.lineShort}</p>
               </div>
             </div>
           </div>
