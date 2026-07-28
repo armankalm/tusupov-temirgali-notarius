@@ -39,12 +39,12 @@
 - [x] Проверить `README.md` и `public/manifest.json` на упоминания старого города — упоминаний нет (дефолтный CRA-текст); `manifest.json` дополнительно назван по нотариусу, `theme_color` приведён к `#132a4a`
 
 ### Task 3: Дизайн-система — палитра, типографика, токены
-- [ ] Переписать `:root` в `src/index.css`: заменить синие `--primary-*` на тёмно-синий (`#132a4a`-класс), добавить `--gold`/`--accent-warm` (золото/бежевый), нейтрали `--bg-cream`, `--border-subtle`
-- [ ] Добавить шкалу отступов (`--space-1..--space-8`) и радиусов (`--radius-sm/md/lg`) вместо одного `--border-radius`
-- [ ] Смягчить тени: убрать `--shadow-xl` с большим blur, задать 3 уровня спокойных теней
-- [ ] Подключить serif-шрифт для заголовков (локально или `<link>` в `public/index.html`), задать `--font-heading` и `--font-body`
-- [ ] Применить `--font-heading` к `h1..h6` в `src/index.css`, выставить `letter-spacing` и `line-height` под serif
-- [ ] Сократить `--transition` до `0.2s ease` и убрать глобальный `.btn:hover { transform: translateY(-2px) }`
+- [x] Переписать `:root` в `src/index.css`: заменить синие `--primary-*` на тёмно-синий (`#132a4a`-класс), добавить `--gold`/`--accent-warm` (золото/бежевый), нейтрали `--bg-cream`, `--border-subtle`
+- [x] Добавить шкалу отступов (`--space-1..--space-8`) и радиусов (`--radius-sm/md/lg`) вместо одного `--border-radius` (`--border-radius` сохранён как алиас `var(--radius-md)` — на него завязаны `App.css`/`Header.css`/`Footer.css`)
+- [x] Смягчить тени: убрать `--shadow-xl` с большим blur, задать 3 уровня спокойных теней (`--shadow-xl` сведён к `var(--shadow-lg)` ради обратной совместимости)
+- [x] Подключить serif-шрифт для заголовков (локально или `<link>` в `public/index.html`), задать `--font-heading` и `--font-body` — Playfair Display + Inter через Google Fonts с `preconnect`
+- [x] Применить `--font-heading` к `h1..h6` в `src/index.css`, выставить `letter-spacing` и `line-height` под serif
+- [x] Сократить `--transition` до `0.2s ease` и убрать глобальный `.btn:hover { transform: translateY(-2px) }`
 
 ### Task 4: Убрать визуальный шум и градиенты
 - [ ] Убрать `rotate()` из всех hover-эффектов: `src/Header.css` (`.icon-wrapper`, `.social-link.whatsapp`, `.social-link.telegram`), `src/App.css` (`.service-card:hover .fa-2x`), `src/Footer.css` (`.footer-social-link`)
