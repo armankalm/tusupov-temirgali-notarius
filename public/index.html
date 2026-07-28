@@ -1,48 +1,108 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-   
+    <meta name="theme-color" content="#132a4a" />
+
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     <meta name="google-site-verification" content="R-eD41T5hAY9DGwnlv7DOhhSsYHPmAsZLyC1cXOh2LY" />
     <meta name="yandex-verification" content="8ae2bd7dd4f0917d" />
-    
+
     <meta name="robots" content="all" />
-    <meta name="keywords" content="нотариус, нотариус тараз, тусупов темиргали расович, тусупов темиргали, ЕНИС, енотариат, поиск наследников, поиск нотариусов, ТНП, РНП, документы, закон, тараз, тусупов, темиргали, расович">
+    <meta name="keywords" content="нотариус караганда, нотариус в караганде, нотариальные услуги караганда, нотариус бухар жырау, нотариус карагандинской области, тусупов темиргали расович, тусупов темиргали, доверенность караганда, наследство караганда, договор купли-продажи нотариус, ЕНИС, енотариат, поиск наследников, поиск нотариусов, нотариус рядом">
     <meta
       name="description"
-      content="
-      Нотариус тараз Тусупов Темиргали Расович.
-      Нотариальная палата Жамбылской области
-      Номер государственной лицензии: 0003207
-      Дата выдачи лицензии: 28.12.2010
-      Адрес: г.Тараз, Толе би , 53,
-      Рабочий телефон: +7 (705) 737 2926
-      Режим работы: с 9:00 до 18:00
-      Электронный адрес: tusupov_71@mail.ru
-      "
+      content="Нотариус в Караганде — Тусупов Темиргали Расович. Карагандинская областная нотариальная палата, государственная лицензия № 0003207 от 28.12.2010. Адрес: г. Караганда, проспект Бухар жырау, строение 49. Телефон: +7 (705) 737 2926. Режим работы: Пн-Сб 9:00-18:00, обед 13:00-14:00, воскресенье выходной. E-mail: tusupov_71@mail.ru"
     />
-    <title>Нотариус Тусупов Темиргали Расович</title>
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ru_RU" />
+    <meta property="og:site_name" content="Нотариус Тусупов Темиргали Расович" />
+    <meta property="og:title" content="Нотариус в Караганде — Тусупов Темиргали Расович" />
+    <meta property="og:description" content="Нотариальные услуги в Караганде: доверенности, договоры, наследство, согласия. Пр. Бухар жырау, стр. 49. Пн-Сб 9:00-18:00, обед 13:00-14:00. Телефон +7 (705) 737 2926." />
+    <meta property="og:image" content="%PUBLIC_URL%/logo512.png" />
+    <meta property="og:image:alt" content="Нотариус в Караганде — Тусупов Темиргали Расович" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Нотариус в Караганде — Тусупов Темиргали Расович" />
+    <meta name="twitter:description" content="Нотариальные услуги в Караганде: доверенности, договоры, наследство, согласия. Пн-Сб 9:00-18:00, обед 13:00-14:00." />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo512.png" />
+
+    <title>Нотариус в Караганде — Тусупов Темиргали Расович</title>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "additionalType": "https://schema.org/Notary",
+        "name": "Нотариус Тусупов Темиргали Расович",
+        "description": "Частный нотариус в Караганде. Доверенности, договоры, наследственные дела, согласия, копии документов.",
+        "image": "%PUBLIC_URL%/logo512.png",
+        "telephone": "+77057372926",
+        "email": "tusupov_71@mail.ru",
+        "priceRange": "$$",
+        "currenciesAccepted": "KZT",
+        "areaServed": {
+          "@type": "City",
+          "name": "Караганда"
+        },
+        "memberOf": {
+          "@type": "Organization",
+          "name": "Карагандинская областная нотариальная палата"
+        },
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "проспект Бухар жырау, строение 49",
+          "addressLocality": "Караганда",
+          "addressRegion": "Карагандинская область",
+          "addressCountry": "KZ"
+        },
+        "founder": {
+          "@type": "Person",
+          "name": "Тусупов Темиргали Расович",
+          "jobTitle": "Нотариус",
+          "hasCredential": {
+            "@type": "EducationalOccupationalCredential",
+            "credentialCategory": "Государственная лицензия",
+            "identifier": "0003207",
+            "validFrom": "2010-12-28"
+          }
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "09:00",
+            "closes": "13:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "14:00",
+            "closes": "18:00"
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>Для работы сайта необходимо включить JavaScript.</noscript>
     <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
-
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
-
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
   </body>
 </html>
